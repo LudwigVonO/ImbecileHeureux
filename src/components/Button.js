@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Button = ({ onClick, styleType = 'primary', label }) => {
+const Button = ({ onClick, styleType = 'primary', label, isDisabled }) => {
   const styles = {
     primary: {
       backgroundColor: '#007bff',
@@ -26,10 +24,19 @@ const Button = ({ onClick, styleType = 'primary', label }) => {
       borderRadius: '5px',
       cursor: 'pointer',
     },
+    disabled: {
+      backgroundColor: 'black',
+      color: '#fff',
+      border: 'none',
+      padding: '10px 20px',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      opacity : 0.15
+    },
   };
 
   return (
-    <button style={styles[styleType]} onClick={onClick}>
+    <button style={isDisabled ? styles["disabled"] : styles[styleType]} onClick={onClick} disabled={isDisabled}>
       {label}
     </button>
   );

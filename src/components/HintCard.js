@@ -27,8 +27,7 @@ const styles = {
     justifyContent: 'center'
   },
   hint: {
-    fontSize: '1rem',
-    color: '#555',
+    fontSize: '1rem'
   },
 };
 

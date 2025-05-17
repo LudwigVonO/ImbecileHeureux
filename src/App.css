@@ -8,3 +8,8 @@
   height: 100%;
 }
 
+.mainContainer {
+  max-height: 90%;
+  display: grid;
+  grid-template-rows: 9fr 1fr;
+}

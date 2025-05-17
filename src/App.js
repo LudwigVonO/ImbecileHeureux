@@ -22,6 +22,7 @@ function App() {
     axios.get("https://script.google.com/macros/s/AKfycbx3su65lCOj-JcW5U7dBJxl5IhAMmCb_yLAzyQ-j9guI5nZ8LRwzxRBQSg9IgVoCXQ/exec")
       .then(response => setPuns(randomizeArray(response.data)))
       .catch(error=>console.log(error))
+    console.log(puns);
   },[]);
 
   const handleNextPunClick = (e) => {
@@ -39,9 +40,9 @@ function App() {
     setReveal(true);
   }
   return (
-    <div className="App">
-      <Navbar toggleDarkMode={toggleDarkMode} toggleMenu={toggleMenu} />
-      <div className='h-full flex flex-col'>
+    <div className={`App flex flex-col ${isDarkMode ? "bg-gray-800 text-white" : "bg-gray-400"}`}>
+      <Navbar toggleDarkMode={toggleDarkMode} toggleMenu={toggleMenu} isDarkMode={isDarkMode}/>
+      <div className='flex flex-col max-w-[80%] self-center mainContainer'>
 
         {
           puns.length > 0 &&
@@ -60,12 +61,12 @@ function App() {
               })}
             </div>
         }
-        <div class='flex flex-col gap-5 w-[min(300px,80%)] m-auto items-center'>
+        <div class='flex flex-col md:flex-row gap-5 w-[min(300px,80%)] m-auto items-center'>
           <div class='flex flex-row  gap-5 justify-between align-center'>
-            {puns[currentItem] && puns[currentItem].hints && puns[currentItem].hints[currentDetailLevel+1] && <Button onClick={handleNextHintClick} label="Autre Indice" styleType='secondary'/>}
-            <Button onClick={handleRevealClick} label="Langue au chat" styleType='primary'/>
+            <Button onClick={handleNextHintClick} label="Autre Indice" styleType='secondary' isDisabled={!puns[currentItem] || !puns[currentItem].hints || !puns[currentItem].hints[currentDetailLevel+1]}/>
+            <Button onClick={handleRevealClick} label="Langue au chat" styleType='primary' isDisabled={reveal}/>
           </div>
-            <Button onClick={handleNextPunClick} label="Change moi cette merde" styleType='danger'/>
+            <Button onClick={handleNextPunClick} label="Prochaine Enigme" styleType='danger'/>
         </div>
       </div>
     </div>

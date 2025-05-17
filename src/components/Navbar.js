@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 
-const Navbar = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const Navbar = ({isDarkMode,toggleDarkMode}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark");
-  };
 
   return (
     <nav className={`bg-gray-100 dark:bg-gray-800 shadow-md`}>
@@ -35,12 +29,12 @@ const Navbar = () => {
           </div>
           <div className="flex items-center space-x-4">
             
-            {/* <button
+            <button
               onClick={toggleDarkMode}
               className="text-gray-800 dark:text-gray-200 focus:outline-none"
               >
               {isDarkMode ? "☀️" : "🌙"}
-            </button> */}
+            </button>
           </div>
           </div>
             <button
