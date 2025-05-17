@@ -19,7 +19,7 @@ function App() {
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   useEffect( () => {
-    axios.get("https://script.google.com/macros/s/AKfycbzBO3G-Gjx5Il1gXkBolGjbGu1LMwv59NjKaQlogXcr4NrSwxrgWh6ycINNHP7OX3I/exec")
+    axios.get("https://script.google.com/macros/s/AKfycbx3su65lCOj-JcW5U7dBJxl5IhAMmCb_yLAzyQ-j9guI5nZ8LRwzxRBQSg9IgVoCXQ/exec")
       .then(response => setPuns(randomizeArray(response.data)))
       .catch(error=>console.log(error))
   },[]);
