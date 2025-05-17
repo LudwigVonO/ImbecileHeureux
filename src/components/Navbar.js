@@ -34,12 +34,13 @@ const Navbar = () => {
             </a>
           </div>
           <div className="flex items-center space-x-4">
-            <button
+            
+            {/* <button
               onClick={toggleDarkMode}
               className="text-gray-800 dark:text-gray-200 focus:outline-none"
               >
               {isDarkMode ? "☀️" : "🌙"}
-            </button>
+            </button> */}
           </div>
           </div>
             <button

@@ -20,7 +20,7 @@ function App() {
 
   useEffect( () => {
     axios.get("https://script.google.com/macros/s/AKfycbzBO3G-Gjx5Il1gXkBolGjbGu1LMwv59NjKaQlogXcr4NrSwxrgWh6ycINNHP7OX3I/exec")
-      .then(response => setPuns(response.data))
+      .then(response => setPuns(randomizeArray(response.data)))
       .catch(error=>console.log(error))
   },[]);
 
@@ -65,7 +65,7 @@ function App() {
             {puns[currentItem] && puns[currentItem].hints && puns[currentItem].hints[currentDetailLevel+1] && <Button onClick={handleNextHintClick} label="Autre Indice" styleType='secondary'/>}
             <Button onClick={handleRevealClick} label="Langue au chat" styleType='primary'/>
           </div>
-            {reveal && <Button onClick={handleNextPunClick} label="Prochain challenge bambi" styleType='danger'/>}
+            <Button onClick={handleNextPunClick} label="Change moi cette merde" styleType='danger'/>
         </div>
       </div>
     </div>

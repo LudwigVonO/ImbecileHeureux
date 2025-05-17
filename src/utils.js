@@ -1,13 +1,12 @@
 function randomizeArray (array) {
   var pointer = Math.floor(Math.random()*array.length);
-  //return array;
-  const newArray = [];
-  while (array.length > 0) {
+  const randomizedArray = [];
+  for (let i = 0; i <= array.length ; i++) {
     console.log(array[pointer]);
-    newArray.push(array.splice(pointer,1));
+    randomizedArray.push(...array.splice(pointer,1));
     pointer = Math.floor(Math.random()*array.length);
   }
-  return newArray;
+  return randomizedArray;
   
 }
 export default randomizeArray;
