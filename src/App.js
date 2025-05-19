@@ -1,14 +1,16 @@
 import './App.css';
-import {useEffect, useState, UseState} from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
 import AnswerCard from './components/AnswerCard';
 import HintCard from './components/HintCard';
 import Button from './components/Button';
 import Navbar from './components/Navbar';
 import randomizeArray from './utils';
+import CategorySelector from './components/Select';
 
 function App() {
   const [puns,setPuns]= useState([]);
+  const [selectedCategories,setSelectedCategories] = useState(['Tout']);
   const [reveal,setReveal]=useState(false);
   const [currentDetailLevel,setCurrentDetailLevel] = useState(0);
   const [currentItem,setCurrentItem] = useState(0);
@@ -17,12 +19,27 @@ function App() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
+  const categoryOptions = ['Sport','Musique','Autre','Politique','Marques','Histoire','Littérature','Antique','Cinéma','Art','Célébrités','Tout'];
+
+  function filterPuns () {
+    console.log(puns)
+    const filteredPuns = puns.filter((pun)=>pun.category.reduce((acc,category) =>{
+      console.log()
+      if(selectedCategories.includes(category)) return true ; 
+    },false))
+    return filteredPuns
+  }
+
+  useEffect( () => {
+    setPuns(filterPuns(puns));
+  },[selectedCategories])
 
   useEffect( () => {
     axios.get("https://script.google.com/macros/s/AKfycbx3su65lCOj-JcW5U7dBJxl5IhAMmCb_yLAzyQ-j9guI5nZ8LRwzxRBQSg9IgVoCXQ/exec")
-      .then(response => setPuns(randomizeArray(response.data)))
+      .then(response => {
+        setPuns(randomizeArray(response.data));        
+      })
       .catch(error=>console.log(error))
-    console.log(puns);
   },[]);
 
   const handleNextPunClick = (e) => {
@@ -43,7 +60,7 @@ function App() {
     <div className={`App flex flex-col ${isDarkMode ? "bg-gray-800 text-white" : "bg-gray-400"}`}>
       <Navbar toggleDarkMode={toggleDarkMode} toggleMenu={toggleMenu} isDarkMode={isDarkMode}/>
       <div className='flex flex-col max-w-[80%] self-center mainContainer'>
-
+        <CategorySelector selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} categoryOptions={categoryOptions} />
         {
           puns.length > 0 &&
           <div>
